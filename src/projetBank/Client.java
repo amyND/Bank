@@ -8,6 +8,7 @@ import java.util.ListIterator;
 
 
 public class Client {
+
 	//attributs
 	protected String nom;
 	protected String prenom;
@@ -18,6 +19,9 @@ public class Client {
 	//constructeur 
 	public Client(){
 		System.out.println("Creation du client null");
+		for (int i=0; i<5; i++){
+			this.tab.add(null);
+		}
 	}
 	
 	public Client(String nom, String prenom, int age, int numero,List<Compte> tab) {
@@ -25,12 +29,22 @@ public class Client {
 		this.prenom = prenom;
 		this.age = age;
 		this.numero = numero;
+		if (tab.size() > 5){
+			System.out.println("Trop de comptes!!!");		
+			System.exit(0);
+		}
 		this.tab = tab;
 	}
 	
 	//méthodes
 	public void ajouterCompte(Compte unCompte){
-		this.tab.add(unCompte);
+		if (this.tab.size() < 5){
+			this.tab.add(unCompte);			
+		}
+		else {
+			System.out.println("Taille du tab = " +this.tab.size()+ ", donc, impossible de rajouter le compte "+unCompte);
+		}
+		
 //		for(int i =0; i<this.tab.length; i++) {
 //			
 //			if(this.tab[i] ==  unCompte){
@@ -77,7 +91,6 @@ public class Client {
 //	}
 	
 	public List<Compte> getComptes() {
-		System.out.println("Voici la liste des comptes");
 		for(Compte c:tab) {
 			System.out.println(c);
 		}
@@ -117,14 +130,13 @@ public class Client {
 		this.numero = numero;
 	}
 
-	public Compte[] getTab() {
+	public List<Compte> getTab() {
 		return tab;
 	}
 
-	public void setTab(Compte[] tab) {
+	public void setTab(List<Compte> tab) {
 		this.tab = tab;
 	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -137,10 +149,11 @@ public class Client {
 		builder.append(", numero=");
 		builder.append(numero);
 		builder.append(", tab=");
-		builder.append(Arrays.toString(tab));
+		builder.append(tab);
 		builder.append("]");
 		return builder.toString();
 	}
+
 	
 	
 }

@@ -4,7 +4,7 @@ public class CompteASeuilRemunere extends CompteRemunere implements ICompteRemun
 	
 	//constructeurs
 	public CompteASeuilRemunere (int num, double lesolde, double taux ) {
-		super();
+		super(num, lesolde, taux);
 	}
 
 	@Override
